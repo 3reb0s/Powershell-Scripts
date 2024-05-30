@@ -1,6 +1,6 @@
 ﻿<#
     .Description
-    This PowerShell script will disable insecure SSL/TLS Protocols and Cipher.
+    This PowerShell script will disable insecure SSL/TLS Protocols and Ciphers. 
     More information https://www.eventsentry.com/validationscripts/guid/78fcd8a8-18af-49f4-8a64-bccb901e5557
     https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/manage-ssl-protocols-in-ad-fs
 #>
@@ -54,3 +54,5 @@ New-ItemProperty -path 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders
 Write-Host 'RC4 has been disabled.'
 
 Disable-TlsCipherSuite -Name 'TLS_RSA_WITH_3DES_EDE_CBC_SHA'
+
+Write-Host 'TLS_RSA_WITH_3DES_EDE_CBC_SHA has been disabled'
