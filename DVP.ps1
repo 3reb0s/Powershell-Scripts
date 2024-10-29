@@ -1,6 +1,6 @@
-# Enable SMB Signing
-Set-SmbServerConfiguration -RequireSecuritySignature $true -Force -Confirm:$False
-Set-SmbClientConfiguration -RequireSecuritySignature $true -Force -Confirm:$False
+# Enable SMB Signing for both Server and Client
+Set-SmbServerConfiguration -RequireSecuritySignature $true -Force -Confirm:$false
+Set-SmbClientConfiguration -RequireSecuritySignature $true -Force -Confirm:$false
 
 # Define registry path for NetBIOS setting
 $netbiosRegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces"
@@ -28,3 +28,4 @@ if (!(Test-Path $mdnsRegistryPath)) {
 New-ItemProperty -Path $mdnsRegistryPath -Name $valueName -PropertyType DWORD -Value 0 -Force | Out-Null
 
 Write-Output "mDNS has been disabled by setting EnableMDNS to 0 in the registry."
+
