@@ -1,6 +1,6 @@
 #Set SMB Signing
-Set-SmbServerConfiguration -RequireSecuritySignature $true
-Set-SmbServerConfiguration -RequireSecuritySignature $true
+Set-SmbServerConfiguration -RequireSecuritySignature $true -Froce
+Set-SmbServerConfiguration -RequireSecuritySignature $true -Froce
 
 #Disable NBT-NS 
 New-ItemProperty -Path $registryPath -Name 'EnableNetbios' -Value 0 -PropertyType DWord -Force | Out-Null
