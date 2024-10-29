@@ -1,6 +1,6 @@
 # Enable SMB Signing
-Set-SmbServerConfiguration -RequireSecuritySignature $true -Force
-Set-SmbClientConfiguration -RequireSecuritySignature $true -Force
+Set-SmbServerConfiguration -RequireSecuritySignature $true -Force -Confirm:$False
+Set-SmbClientConfiguration -RequireSecuritySignature $true -Force -Confirm:$False
 
 # Define registry path for NetBIOS setting
 $netbiosRegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces"
