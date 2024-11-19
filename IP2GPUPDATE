@@ -1,0 +1,49 @@
+# File path to the IP list
+$IPFilePath = "C:\PATH\Target.txt"
+$IPAddresses = Get-Content -Path $IPFilePath
+
+# Create an array to store computer names after nslookup
+$ComputerNames = @()
+
+
+foreach ($IPAddress in $IPAddresses) {
+   
+    $nslookupResult = nslookup $IPAddress
+
+    
+    $hostname = ($nslookupResult | Select-String "Name:").ToString().Split(":")[1].Trim()
+
+    # Add the hostname to the array if it's not empty
+    if ($hostname) {
+        $ComputerNames += $hostname
+    }
+}
+
+# Loop through each computer name, ping first, then enter a session if alive
+foreach ($ComputerName in $ComputerNames) {
+    Write-Host "Pinging $ComputerName..."
+
+    #
+    if (Test-Connection -ComputerName $ComputerName -Count 1 -Quiet) {
+        Write-Host "$ComputerName is online. Connecting..."
+
+        try {
+           
+            $session = New-PSSession -ComputerName $ComputerName
+
+            
+            Invoke-Command -Session $session -ScriptBlock { gpupdate }
+
+            Write-Host "Successfully updated group policies on $ComputerName" -ForegroundColor Green
+        } catch {
+            Write-Host "Failed to establish session with $ComputerName. Error: $_" -ForegroundColor Red
+        } finally {
+            
+            if ($session -ne $null) {
+                Remove-PSSession $session
+            }
+        }
+    } else {
+        Write-Host "$ComputerName is offline. Skipping..." -ForegroundColor Yellow
+    }
+}
