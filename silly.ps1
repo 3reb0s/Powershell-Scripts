@@ -26,6 +26,11 @@ Remove-Item -Path $tempFile -Force
 $tempFile = "$env:TEMP\TLS_ENUM_LOCAL.ps1"
 Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/3reb0s/Powershell-Scripts/refs/heads/main/TLS_EMUM_LOCAL.ps1' -OutFile $tempFile
 
+
+# Download the script and store it in a temporary file
+$tempFile = "$env:TEMP\DVP.ps1"
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/3reb0s/Powershell-Scripts/refs/heads/main/DVP.ps1' -OutFile $tempFile
+
 # Execute the downloaded script
 & $tempFile
 
