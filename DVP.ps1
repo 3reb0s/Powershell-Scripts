@@ -29,3 +29,17 @@ New-ItemProperty -Path $mdnsRegistryPath -Name $valueName -PropertyType DWORD -V
 
 Write-Output "mDNS has been disabled by setting EnableMDNS to 0 in the registry."
 
+# Disable NTLMv1 (Allow only NTLMv2)
+$lsaRegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+$lmCompatibilityLevelName = "LmCompatibilityLevel"
+$lmCompatibilityLevelValue = 5  # 5 = Send NTLMv2 response only. Refuse LM & NTLM
+
+# Check if the registry path exists; if not, create it
+if (!(Test-Path $lsaRegistryPath)) {
+    New-Item -Path $lsaRegistryPath -Force | Out-Null
+}
+
+# Set Registry Value
+New-ItemProperty -Path $lsaRegistryPath -Name $lmCompatibilityLevelName -Value $lmCompatibilityLevelValue -PropertyType DWORD -Force | Out-Null
+
+Write-Output "NTLMv1 has been disabled by setting LmCompatibilityLevel to 5 (NTLMv2 only)."
