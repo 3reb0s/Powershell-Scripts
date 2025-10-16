@@ -12,15 +12,15 @@ Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/3reb0s/Powershell-Scri
 Remove-Item -Path $tempFile -Force
 
 # Download the script and store it in a temporary file
-#$tempFile = "$env:TEMP\tls_cipher.ps1"
-#Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/3reb0s/Powershell-Scripts/refs/heads/main/TLS_Cipher.ps1' -OutFile $tempFile
+$tempFile = "$env:TEMP\tls_cipher.ps1"
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/3reb0s/Powershell-Scripts/refs/heads/main/TLS_Cipher.ps1' -OutFile $tempFile
 
 # Execute the downloaded script
-#& $tempFile
+& $tempFile
 
 
 # Optionally, clean up by removing the downloaded script file
-#Remove-Item -Path $tempFile -Force
+Remove-Item -Path $tempFile -Force
 
 # Download the script and store it in a temporary file
 $tempFile = "$env:TEMP\TLS_ENUM_LOCAL.ps1"
